@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------------------------------
 
 // initial array of gifs
-var gifs = ["Debugging Code", "Coder", "Web Dev", "Punch Computer", "Coding Frustration", "Coding Meme", "Mind Blown", "Star Trek", "Picard", "Janeway", "Benjamin Sisko", "The Borg"];
+var gifs = ["Debugging Code", "Coder", "Punching Computer", "Coding Frustration", "Mind Blown", "Star Trek", "Picard", "Janeway", "Benjamin Sisko", "The Borg"];
 
 // starting and ending indexes for iterating through GIPHY API Response Data
 var startingIndex = 1;
@@ -67,16 +67,17 @@ function getGifData(gifTopic) {
       $(this).attr("src", $(this).attr("data-altSrc"));
       // replace the alternate animated value with the stored static value to switch and stop animation on next click
       $(this).attr("data-altSrc", temp);
+    })
 
-      // functionality for handheld device touch
-    }), $(".gif-still").touch(
+    // functionality for handheld device touch recognition
+    $(".gif-still").on("touchstart", function() {
       // set temp variable to hold still img src
-      temp = $(this).attr("src"),
+      var temp = $(this).attr("src");
       // change img src to alternate animated value stored during API call
-      $(this).attr("src", $(this).attr("data-altSrc")),
+      $(this).attr("src", $(this).attr("data-altSrc"));
       // replace the alternate animated value with the stored static value to switch and stop animation on next click
-      $(this).attr("data-altSrc", temp)
-    )
+      $(this).attr("data-altSrc", temp);
+    })
 
     // on image double click, handle the same functionality for switching to animated, hide regular app view, generate and display theater view with back and download buttons
     $(".gif-still").dblclick(function() {
@@ -201,7 +202,7 @@ $(document).on("click", ".gif", function() {
 
   // create and display instructions
   $("#instructions-div").empty();
-  var instructions = $("<h3 id='instructions'>" + "Mouseover: View or Stop Animation | Dbl Click: Theater View" + "</h3>" + "<br>");
+  var instructions = $("<h3 id='instructions'>" + "Mouseover/Touch: View or Stop Animation | Dbl Click: Theater View" + "</h3>" + "<br>");
   $("#instructions-div").append(instructions);
   instructions.hide(0);
   instructions.fadeIn(1000);
