@@ -202,7 +202,7 @@ function getGifData(gifTopic) {
       })
 
       // include a download button for the user to download the gif they are viewing in theater mode
-      var downloadBtn = $("<a target='_blank' href='" + $(this).attr("src") + "' download><button id='download-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Download from GIPHY</button></a>");
+      var downloadBtn = $("<a target='_blank' href='" + $(this).attr("src") + "' download='" + $(this).attr("src") + "'><button id='download-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Download from GIPHY</button></a>");
       theaterContainer.append(downloadBtn);
     })
   })
