@@ -6,7 +6,7 @@
 /* IDs */
 
 #gifs-view {
-    height: 300px;
+    height: 280px;
 }
 
 #gif-form {
@@ -32,7 +32,7 @@
 
 #instructions {
     color:white;
-    font-size: 15px;
+    font-size: 13px;
     margin-bottom:-10px;
 }
 
@@ -41,7 +41,7 @@
     font-size: 12px;
 }
 
-#next-button, #prev-button, #download-button, #back-button {
+#next-button, #prev-button {
     padding: 10px 0 10px 0;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -58,8 +58,33 @@
     border: 1px solid white;
 }
 
+#back-button {
+    padding: 10px 0 10px 0;
+    margin-top: 10px;
+    background-color: #eee;
+    border: none;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+#download-button {
+    padding: 10px 0 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #eee;
+    border: none;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
 #theater img {
-    padding: 30px;
+    padding: 50px;
+}
+
+#theater {
+    margin-bottom: 0;
 }
 
 /* GLOBAL STYLES */
@@ -68,6 +93,9 @@ body {
     text-align: center;
     background-color: black;
     font-family: 'Press Start 2P', cursive;
+    background-image: url(../img/darkness.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 button {
@@ -111,7 +139,7 @@ button {
 .footer {
     color: white;
     padding: 10px;
-    font-size: 12px;
+    font-size: 10px;
     opacity: 0.5;
 }
 
