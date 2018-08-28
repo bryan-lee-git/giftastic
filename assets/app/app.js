@@ -65,9 +65,18 @@ function getGifData(gifTopic) {
       var temp = $(this).attr("src");
       // change img src to alternate animated value stored during API call
       $(this).attr("src", $(this).attr("data-altSrc"));
-      //  replace the alternate animated value with the stored static value to switch and stop animation on next click
+      // replace the alternate animated value with the stored static value to switch and stop animation on next click
       $(this).attr("data-altSrc", temp);
-    })
+
+      // functionality for handheld device touch
+    }), $(".gif-still").touch(
+      // set temp variable to hold still img src
+      temp = $(this).attr("src"),
+      // change img src to alternate animated value stored during API call
+      $(this).attr("src", $(this).attr("data-altSrc")),
+      // replace the alternate animated value with the stored static value to switch and stop animation on next click
+      $(this).attr("data-altSrc", temp)
+    )
 
     // on image double click, handle the same functionality for switching to animated, hide regular app view, generate and display theater view with back and download buttons
     $(".gif-still").dblclick(function() {
