@@ -1,13 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+button {
+    color: white;
+}
+
 #gif-form {
     margin: 20px;
 }
 
-#add-gif {
-    margin-bottom: 4px;
-    border: 1px solid black;
+#gif-input {
+    width: 100%;
 }
 
-#add-gif:hover {
+#add-gif {
+    width: 100%;
+    margin-bottom: 4px;
+    margin-top:20px;
+    background-color: white;
+    box-shadow: 1px 1px 1px black;
+}
+
+#add-gif:hover, #add-gif:active, #add-gif:checked, #add-gif:focus, #add-gif:visited {
     background-color: black;
     color: white;
 }
@@ -19,30 +32,30 @@
 }
 
 #next-button {
+    padding: 20px;
     margin-top: 10px;
-    padding: 10px;
-    margin-left: 1px;
-    background-color: white;
-    color: black;
+    background-color: gray;
+    border: none;
+    font-size: 20px;
 }
 
 #next-button:hover {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border: 1px solid white;
 }
 
 #prev-button {
+    padding: 20px;
     margin-top: 10px;
-    padding: 10px;
-    margin-right: 1px;
     background-color: gray;
     border: none;
+    font-size: 20px;
 }
 
 #prev-button:hover {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border: 1px solid white;
 }
 
@@ -50,6 +63,7 @@
 body {
     text-align: center;
     background-color: black;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .container {
@@ -59,7 +73,9 @@ body {
 .gif-button {
     padding: 10px;
     margin: 20px 10px 0px 10px;
-    background-color: black;
+    background-color:black;
+    color: white;
+    box-shadow: 1px 1px 1px black;
 }
 
 .gif-button:hover, .gif-button:active, .gif-button:checked, .gif-button:focus, .gif-button:visited {
@@ -70,7 +86,10 @@ body {
 
 .jumbotron {
     margin-top: 20px;
-    padding:10px;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .footer {
@@ -89,7 +108,7 @@ body {
 }
 
 .gif-div img:hover {
-    border: 4px solid white;
+    border: 2px solid transparent;
 }
 
 .rating {
