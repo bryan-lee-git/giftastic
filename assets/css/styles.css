@@ -5,6 +5,10 @@
 
 /* IDs */
 
+#gifs-view {
+    height: 300px;
+}
+
 #gif-form {
     margin: 20px;
 }
@@ -37,9 +41,10 @@
     font-size: 12px;
 }
 
-#next-button, #prev-button {
+#next-button, #prev-button, #download-button, #back-button {
     padding: 10px 0 10px 0;
     margin-top: 10px;
+    margin-bottom: 10px;
     background-color: #eee;
     border: none;
     font-size: 20px;
@@ -47,10 +52,14 @@
     font-weight: bold;
 }
 
-#next-button:hover, #prev-button:hover {
+#next-button:hover, #prev-button:hover, #download-button:hover, #back-button:hover {
     background-color: white;
     color: black;
     border: 1px solid white;
+}
+
+#theater img {
+    padding: 30px;
 }
 
 /* GLOBAL STYLES */
@@ -77,6 +86,7 @@ button {
     background-color:black;
     color: white;
     box-shadow: 1px 1px 1px black;
+    font-size: 11px;
 }
 
 .gif-button:hover, .gif-button:active, .gif-button:checked, .gif-button:focus, .gif-button:visited {
