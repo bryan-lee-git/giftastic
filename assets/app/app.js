@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------------------------------
 
 // initial array of gifs
-var gifs = ["Debugging Code", "Coding", "Web Dev", "Punch Computer", "Coding Frustration", "Coding Meme", "Mind Blown", "Picard", "Nerd Life", "The Borg"];
+var gifs = ["Debugging Code", "Coder", "Web Dev", "Punch Computer", "Coding Frustration", "Coding Meme", "Mind Blown", "Star Trek", "Picard", "Janeway", "Benjamin Sisko", "The Borg"];
 
 // starting and ending indexes for iterating through GIPHY API Response Data
 var startingIndex = 1;
@@ -60,7 +60,7 @@ function getGifData(gifTopic) {
     }
 
     // switch the src url to the previously called and stored animated gif URL, create a temp for reverse functionality (switches back to static when clicked again)
-    $(".gif-still").on("click", function() {
+    $(".gif-still").on("mouseover", function() {
       // set temp variable to hold still img src
       var temp = $(this).attr("src");
       // change img src to alternate animated value stored during API call
@@ -192,7 +192,7 @@ $(document).on("click", ".gif", function() {
 
   // create and display instructions
   $("#instructions-div").empty();
-  var instructions = $("<h3 id='instructions'>" + "Click to View Animation | Reclick to Stop Animation | Dbl Click for Theater View" + "</h3>" + "<br>");
+  var instructions = $("<h3 id='instructions'>" + "Mouseover: View or Stop Animation | Dbl Click: Theater View" + "</h3>" + "<br>");
   $("#instructions-div").append(instructions);
   instructions.hide(0);
   instructions.fadeIn(1000);
