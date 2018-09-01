@@ -6,7 +6,7 @@
 /* IDs */
 
 #gifs-view {
-    height: 280px;
+    min-height: 300px;
 }
 
 #gif-form {
@@ -20,13 +20,13 @@
 #add-gif {
     width: 100%;
     margin-bottom: 4px;
-    margin-top:18px;
+    margin-top:21px;
     background-color: white;
     box-shadow: 1px 1px 1px black;
 }
 
 #add-gif:hover, #add-gif:active, #add-gif:checked, #add-gif:focus, #add-gif:visited {
-    background-color: black;
+    background-color: red;
     color: white;
 }
 
@@ -52,23 +52,15 @@
     font-weight: bold;
 }
 
-#next-button:hover, #prev-button:hover, #download-button:hover, #back-button:hover {
+#next-button:hover, #prev-button:hover, #download-button:hover, #back-button:hover, #clear-button:hover, #fav-button:hover {
     background-color: white;
     color: black;
     border: 1px solid white;
+    border-width: 5px;
+    transition: border-width 0.3s ease-in-out;
 }
 
 #back-button {
-    padding: 10px 0 10px 0;
-    margin-top: 10px;
-    background-color: #eee;
-    border: none;
-    font-size: 20px;
-    color: black;
-    font-weight: bold;
-}
-
-#download-button {
     padding: 10px 0 10px 0;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -77,6 +69,30 @@
     font-size: 20px;
     color: black;
     font-weight: bold;
+}
+
+#buttons-view {
+    padding-top:10px;
+}
+
+#download-button, #clear-button {
+    padding: 10px 0 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #eee;
+    border: none;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+#fav-button {
+    padding: 10px;
+    margin: 10px 5px 0px 5px;
+    background-color:red;
+    color: black;
+    box-shadow: 1px 1px 1px black;
+    font-size: 11px;
 }
 
 #theater img {
@@ -120,20 +136,27 @@ button {
 .gif-button:hover, .gif-button:active, .gif-button:checked, .gif-button:focus, .gif-button:visited {
     background-color: white;
     color: black;
-    border: 1px solid black;
+    border-width: 5px;
+    transition: border-width 0.3s ease-in-out;
+
 }
 
 .jumbotron {
     margin-top: 20px;
+    margin-bottom: 10px;
     padding: 10px 0px 10px 0px;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+    background-color:none;
+    background-color: transparent;
 }
 
 .jumbotron h1 {
     font-family: 'Press Start 2P', cursive;
     font-size: 170%;
+    color: white;
+    margin-bottom: 30px;
 }
 
 .footer {
@@ -143,20 +166,35 @@ button {
     opacity: 0.5;
 }
 
-.gif-div {
-    border-radius: 10px;
+.gif-div, .gif-fav {
+    border-radius: 0px;
 }
 
 .gif-div img {
     border-radius: 10px;
 }
 
-.gif-div img:hover {
+.gif-div img:hover, .gif-fav:hover {
     border: 2px solid transparent;
+}
+
+.gif-fav {
+    margin-bottom: 20px;
 }
 
 .rating {
     color: white;
-    padding-top: 10px;
-    margin-bottom: -10px;
+    padding-top: 20px;
+    margin-bottom: -20px;
+    font-size:8px;
+    text-transform:uppercase;
+}
+
+.title {
+    color:white;
+    font-size:8px;
+    margin-top:5px;
+    line-height:1.5;
+    margin-bottom: 10px;
+    text-transform:uppercase;
 }
