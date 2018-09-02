@@ -45,9 +45,7 @@ function renderButtons() {
 }
 // function for populating GIF stills on search
 function getGifData(gifTopic) {
-  
-  // display intructions in instructions area
-  
+    
   // set GIPHY API url for ajax API call
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gifTopic + "&api_key=dc6zaTOxFJmzC";
   
@@ -56,6 +54,8 @@ function getGifData(gifTopic) {
     url: queryURL,
     method: "GET"
   }).then(function(gifData) {
+
+    $("#gifs-view").fadeIn(100);
 
     // console log the object to make sure the response data is pulling in correctly
     console.log(gifData);
@@ -67,15 +67,14 @@ function getGifData(gifTopic) {
       gif.attr("src", gifData.data[i].images.original_still.url);
       gif.attr("data-altSrc", gifData.data[i].images.original.url);
       gif.attr("data-download", gifData.data[i].images.original.url);
-      gif.tooltip({boundary: 'window'});
-      $("#gifs-view").fadeIn(500);
       $("#gifs-view").append(gifDiv);
       gifDiv.append(gif);
       gifDiv.prepend("<p style='min-height:25px;' class='title'>" + gifData.data[i].title + "</p>");
       gifDiv.append("<p class='rating'>" + "Rated: " + gifData.data[i].rating + "</p>");
       gifDiv.hide(0);
-      gifDiv.fadeIn(1000);
+      gifDiv.fadeIn(800);
     }
+
   })
 }
 
@@ -204,8 +203,8 @@ $(document).on("click", ".gif", function() {
   // next button functionality
   $("#next-button").on("click", function() {
     if (startingIndex < 21) {
-      $("#gifs-view").empty();
-      $("#title-view").empty();
+      $("#gifs-view").empty(500);
+      $("#title-view").empty(500);
       startingIndex += 4;
       endingIndex += 4;
       getGifData(gif);
@@ -245,13 +244,13 @@ $(document).on("dblclick", ".gif-still", function() {
   console.log(this);
 
   // fade main container out, generate and display theater container
-  $("#container-main").fadeOut(500);
+  $("#container-main").fadeOut(200);
   var theaterContainer = $("<div class='container'></div>");
   var theaterView = $("<div id='theater' style='background-color:transparent; padding: none;' class='jumbotron'></div>");
   $("body").append(theaterContainer);
   theaterContainer.append(theaterView);
   theaterContainer.hide(0);
-  theaterContainer.fadeIn(2000);
+  theaterContainer.fadeIn(1000);
 
   // load in the clicked image at a larger size
   $(this).attr("height", "auto");
@@ -260,7 +259,7 @@ $(document).on("dblclick", ".gif-still", function() {
 
   // include a back button to return to previous main container view
   $("#back-button").remove();
-  var backBtn = $("<button id='back-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Back to Search View</button>");
+  var backBtn = $("<button id='back-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Back to Search</button>");
   theaterContainer.append(backBtn);
 
   backBtn.on("click", function() { 
@@ -286,11 +285,11 @@ $(document).on("click", ".gif-still", function() {
   }
 })
 // view favorites button functionality for displaying favorites area and loading in any saved favorites data from local storage
-$(document).on("click","#fav-button", function() {
+$("body").on("click","#fav-button", function() {
 
   $(".footer").fadeOut(200);
   $("#container-main").fadeOut(300);
-  var favsContainer = $("<div style='color:white;margin-top:30px;' class='container'><h5><span style='color:green'>SAVE GIF: Right click (or press and hold if on a mobile device).</span><br><br><span style='color:red;'>REMOVE GIF: Double click: Remove from favorites list.</span></h5></div>");
+  var favsContainer = $("<div style='color:white;margin-top:30px;' class='container'><h5><span style='color:green'>SAVE GIF: Right click (or press and hold if on a mobile device).</span><br><br><span style='color:red;'>REMOVE GIF: Double click to remove single gif from favorites list.</span></h5></div>");
   var favsView = $("<div id='favs' style='margin-bottom:5px;background-color:transparent;' class='row jumbotron'></div>");
   $("body").append(favsContainer);
   favsContainer.append(favsView);
@@ -311,6 +310,10 @@ $(document).on("click","#fav-button", function() {
   backBtn.on("click", function() { 
     favsContainer.hide();
     $("#container-main").fadeIn(1000);
+
+    if (favList.length === 0) {
+      $("#fav-button").remove();
+    }
   })
 
   //  add clear favorites button
