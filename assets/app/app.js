@@ -1,4 +1,3 @@
-
 // GIFtastic - GIPHY API Gif Search / View / Download App
 
 //-----------------------------------------------------------------------------------------------
@@ -8,7 +7,8 @@
 var gifs = ["Debugging Code", "Coder", "Punching Computer", "Coding Frustration", "Mind Blown", "Star Trek", "Picard", "Janeway", "Benjamin Sisko", "The Borg"];
 var startingIndex = 1;
 var endingIndex = 5;
-var favList = "none";
+var favList = [];
+var mostRecent = [];
 
 //-----------------------------------------------------------------------------------------------
 // APP FUNCTIONS
@@ -75,85 +75,6 @@ function getGifData(gifTopic) {
       gifDiv.hide(0);
       gifDiv.fadeIn(1000);
     }
-
-    // switch the src url to the previously called and stored animated gif URL, create a temp for reverse functionality (switches back to static when clicked again)
-    $(".gif-still").on("mouseover", function() {
-      // set temp variable to hold still img src
-      var temp = $(this).attr("src");
-      // change img src to alternate animated value stored during API call
-      $(this).attr("src", $(this).attr("data-altSrc"));
-      // replace the alternate animated value with the stored static value to switch and stop animation on next click
-      $(this).attr("data-altSrc", temp);
-    })
-
-    $(".gif-still").on("mouseleave", function() {
-      // set temp variable to hold still img src
-      var temp = $(this).attr("src");
-      // change img src to alternate animated value stored during API call
-      $(this).attr("src", $(this).attr("data-altSrc"));
-      // replace the alternate animated value with the stored static value to switch and stop animation on next click
-      $(this).attr("data-altSrc", temp);
-    })
-
-    // functionality for handheld device touch recognition
-    $(".gif-still").on("touchstart", function() {
-      // set temp variable to hold still img src
-      var temp = $(this).attr("src");
-      // change img src to alternate animated value stored during API call
-      $(this).attr("src", $(this).attr("data-altSrc"));
-      // replace the alternate animated value with the stored static value to switch and stop animation on next click
-      $(this).attr("data-altSrc", temp);
-    })
-
-    // on image double click, handle the same functionality for switching to animated, hide regular app view, generate and display theater view with back and download buttons
-    $(".gif-still").dblclick(function() {
-
-      // run same actions for single click
-      $(this).attr("src", $(this).attr("data-download"));
-
-      // make sure we are working with the "this" we want to be working with"
-      console.log(this);
-
-      // fade main container out, generate and display theater container
-      $("#container-main").fadeOut(500);
-      var theaterContainer = $("<div class='container'></div>");
-      var theaterView = $("<div id='theater' style='background-color:transparent; padding: none;' class='jumbotron'></div>");
-      $("body").append(theaterContainer);
-      theaterContainer.append(theaterView);
-      theaterContainer.hide(0);
-      theaterContainer.fadeIn(2000);
-
-      // load in the clicked image at a larger size
-      $(this).attr("height", "auto");
-      theaterView.append(this)
-
-      // include a back button to return to previous main container view
-      $("#back-button").remove();
-      var backBtn = $("<button id='back-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Back to Search View</button>");
-      theaterContainer.append(backBtn);
-
-      backBtn.on("click", function() { 
-        theaterContainer.hide();
-        $("#gifs-view").empty();
-        getGifData(gifTopic);
-        $("#container-main").fadeIn(1000);
-      })
-    })
-
-    // saving and displaying favorited GIFs    
-    $(".gif-still").on("click", function() {
-      // when gif is clicked, add it to local storage
-      var storeUrl = $(this).attr("data-download");
-      favList.push(storeUrl);
-      localStorage.setItem("favs", JSON.stringify(favList));
-      console.log(favList);
-
-      if (favList.length > 0) {
-        $("#fav-button").hide();
-        var favBtn = $("<button class='btn' id='fav-button'>View Favorites</button>")
-        $("#gifs-btns").prepend(favBtn);
-      }
-    })
   })
 }
 
@@ -169,11 +90,11 @@ $(document).ready(function() {
   $("#gifs-view").hide();
   $(".jumbotron").slideDown(500);
 
-  //load in any saved data
-  loadFavs();
-
   // calling the renderButtons function to display the initial list of gifs
   renderButtons();
+
+  //load in any saved data
+  loadFavs();
 
 })
 
@@ -208,6 +129,8 @@ $("#add-gif").on("click", function() {
 })
 // GIF topic button - functionality to load in gifs for topic button clicked
 $(document).on("click", ".gif", function() {
+
+  mostRecent.push($(this).attr('data-gifTopic'));
 
   // reset starting and ending indexes for new topic to start on page 1 of data
   startingIndex = 1;
@@ -287,6 +210,78 @@ $(document).on("click", ".gif", function() {
       getGifData(gif);
     }
   })
+})
+// switch the src url to the previously called and stored animated gif URL, create a temp for reverse functionality (switches back to static when clicked again)
+$(document).on("mouseover", ".gif-still", function() {
+  // set temp variable to hold still img src
+  var temp = $(this).attr("src");
+  // change img src to alternate animated value stored during API call
+  $(this).attr("src", $(this).attr("data-altSrc"));
+  // replace the alternate animated value with the stored static value to switch and stop animation on next click
+  $(this).attr("data-altSrc", temp);
+})
+$(document).on("mouseleave", ".gif-still", function() {
+  // set temp variable to hold still img src
+  var temp = $(this).attr("src");
+  // change img src to alternate animated value stored during API call
+  $(this).attr("src", $(this).attr("data-altSrc"));
+  // replace the alternate animated value with the stored static value to switch and stop animation on next click
+  $(this).attr("data-altSrc", temp);
+})
+// functionality for handheld device touch recognition
+$(document).on("touchstart", ".gif-still", function() {
+  // set temp variable to hold still img src
+  var temp = $(this).attr("src");
+  // change img src to alternate animated value stored during API call
+  $(this).attr("src", $(this).attr("data-altSrc"));
+  // replace the alternate animated value with the stored static value to switch and stop animation on next click
+  $(this).attr("data-altSrc", temp);
+})
+// on image double click, handle the same functionality for switching to animated, hide regular app view, generate and display theater view with back and download buttons
+$(document).on("dblclick", ".gif-still", function() {
+
+  // make sure we are working with the "this" we want to be working with"
+  console.log(this);
+
+  // fade main container out, generate and display theater container
+  $("#container-main").fadeOut(500);
+  var theaterContainer = $("<div class='container'></div>");
+  var theaterView = $("<div id='theater' style='background-color:transparent; padding: none;' class='jumbotron'></div>");
+  $("body").append(theaterContainer);
+  theaterContainer.append(theaterView);
+  theaterContainer.hide(0);
+  theaterContainer.fadeIn(2000);
+
+  // load in the clicked image at a larger size
+  $(this).attr("height", "auto");
+  theaterView.append(this)
+
+  // include a back button to return to previous main container view
+  $("#back-button").remove();
+  var backBtn = $("<button id='back-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Back to Search View</button>");
+  theaterContainer.append(backBtn);
+
+  backBtn.on("click", function() { 
+    theaterContainer.hide();
+    $("#gifs-view").empty();
+    getGifData(mostRecent[0]);
+    $("#container-main").fadeIn(1000);
+  })
+})
+// saving and displaying favorited GIFs    
+$(document).on("click", ".gif-still", function() {
+
+  // when gif is clicked, add it to local storage
+  var storeUrl = $(this).attr("data-download");
+  favList.push(storeUrl);
+  localStorage.setItem("favs", JSON.stringify(favList));
+  console.log(favList);
+
+  if (favList.length > 0) {
+    $("#fav-button").hide();
+    var favBtn = $("<button class='btn' id='fav-button'>View Favorites</button>")
+    $("#gifs-btns").prepend(favBtn);
+  }
 })
 // view favorites button functionality for displaying favorites area and loading in any saved favorites data from local storage
 $(document).on("click","#fav-button", function() {
