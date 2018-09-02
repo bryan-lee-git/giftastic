@@ -4,7 +4,7 @@
 // GLOBAL VARIABLES
 //-----------------------------------------------------------------------------------------------
 
-var gifs = ["Debugging Code", "Coder", "Punching Computer", "Coding Frustration", "Mind Blown", "Star Trek", "Picard", "Janeway", "Benjamin Sisko", "The Borg"];
+var gifs = ["Star Trek", "Picard", "TNG", "Janeway", "Voyager", "Benjamin Sisko", "DS-9", "The Borg"];
 var startingIndex = 1;
 var endingIndex = 5;
 var favList = [];
@@ -19,6 +19,7 @@ var mostRecent = [];
 function loadFavs() {
 
   var favParse = JSON.parse(localStorage.getItem("favs"));
+  console.log(favParse)
 
   if (favParse.length > 0) {
     favList = favParse;
@@ -62,7 +63,7 @@ function getGifData(gifTopic) {
     // populate based upon starting and ending index with static image and rating, store animated gif URL as a data value to use later
     for (let i = startingIndex; i < endingIndex; i++) {
       var gifDiv = $("<div class='gif-div col-lg-3 col-sm-6 col-md-3 col-xs-12' style='margin-bottom:10px;padding:20px;'></div>");
-      var gif = $("<img class='gif-still' width='100%' height='200px'></img>");
+      var gif = $("<img class='gif-still' width='100%' height='250px'></img>");
       gif.attr("src", gifData.data[i].images.original_still.url);
       gif.attr("data-altSrc", gifData.data[i].images.original.url);
       gif.attr("data-download", gifData.data[i].images.original.url);
@@ -150,7 +151,7 @@ $(document).on("click", ".gif", function() {
   $("#topic-div").empty();
 
   // add new topic to topic display area
-  $("#topic-div").prepend("Selected Topic: " + gif);
+  $("#topic-div").append("Selected Topic: " + gif);
   $("#topic-div").hide(0);
   $("#topic-div").fadeIn(1000);
 
@@ -254,6 +255,7 @@ $(document).on("dblclick", ".gif-still", function() {
 
   // load in the clicked image at a larger size
   $(this).attr("height", "auto");
+  $(this).attr("width", "80%");
   theaterView.append(this)
 
   // include a back button to return to previous main container view
@@ -296,14 +298,14 @@ $(document).on("click","#fav-button", function() {
   // display all favorited gifs
   for (let i = 0; i < favList.length; i++) {
     var favDiv = $("<div class='gif-div col-lg-3 col-sm-6 col-md-3 col-xs-12' style='padding:10px;'></div>");
-    var fav = $("<img src='" + favList[i] + "' class='gif-fav' width='100%' height='200px' style='margin-top:5px;margin-bottom:5px;'></img>");
+    var fav = $("<img src='" + favList[i] + "' class='gif-fav' width='100%' height='250px' style='margin-top:5px;margin-bottom:5px;'></img>");
     fav.attr("data-favNumber", i);
     favsView.append(favDiv);
     favDiv.append(fav);
   }  
 
   //  add back button
-  var backBtn = $("<button id='back-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Back to Search View</button>");
+  var backBtn = $("<button id='back-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Back to Search</button>");
   favsContainer.append(backBtn);
 
   backBtn.on("click", function() { 
@@ -312,7 +314,7 @@ $(document).on("click","#fav-button", function() {
   })
 
   //  add clear favorites button
-  var clearBtn = $("<button id='clear-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Clear All Favorites</button>");
+  var clearBtn = $("<button id='clear-button' class='col-sm-12 col-xs-12 col-md-12 col-lg-12 btn btn-success'>Clear All</button>");
   favsContainer.append(clearBtn);
 
   clearBtn.on("click", function() { 
